@@ -6,33 +6,28 @@
 const express = require('express')
   , router = express.Router()
   , joi = require('joi')
-  , composition = require('../../lib/composition-find');
+  , schema = require('../../lib/validate-anuncios')
+  , composition = require('../../lib/find-anuncios');
 
-const schema = joi.object().keys ({
-  tag: joi.any().valid('work', 'lifestyle', 'motor', 'mobile').optional(),
-  venta: joi.boolean().required(),
-  nombre: joi.string().alphanum().optional(),
-  precio: joi.string().regex(/^\d*-?\d*$/i).optional(),
-  start: joi.number().default(0).min(0).max(100000).optional(),
-  limit: joi.number().default(1).min(1).max(100).optional(),
-  sort: joi.any().valid('precio', 'nombre', 'venta').default('precio').optional(),
-  token: joi.string().token()
-});
-
-/* GET home page. */
+/**
+ * mildware para la validacion de los datos de entrada de busqueda de los
+ * anuncios.
+ */
 router.get('/', function(req, res, next) {
   const datosQuery = req.query
   joi.validate(datosQuery, schema, (err, value) => {
-    if (err) {
-      throw(err)
-    } else {
-      const parametresFind = composition(value)
+    if (err) { throw(err) }
+    else {
+      //pasamos el req para que nos devuelva una cadena de busqueda em req.find
+      composition(req)
       next();
     }
   })
 });
 
 router.get('/', function(req, res, next) {
+  console.log (req.query)
+  console.log (req.find)
   res.render('index', { title: 'Express' });
 });
 
