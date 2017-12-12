@@ -5,7 +5,8 @@
 
 const express = require('express')
   , router = express.Router()
-  , joi = require('joi');
+  , joi = require('joi')
+  , composition = require('../../lib/composition-find');
 
 const schema = joi.object().keys ({
   tag: joi.any().valid('work', 'lifestyle', 'motor', 'mobile').optional(),
@@ -22,14 +23,13 @@ const schema = joi.object().keys ({
 router.get('/', function(req, res, next) {
   const datosQuery = req.query
   joi.validate(datosQuery, schema, (err, value) => {
-    if (err) {throw(err)}
-
-      //console.log( err.details[0].context.label )
-      //console.log ('---------------------')
-      console.log (value)
-    
+    if (err) {
+      throw(err)
+    } else {
+      const parametresFind = composition(value)
+      next();
+    }
   })
-  next();
 });
 
 router.get('/', function(req, res, next) {

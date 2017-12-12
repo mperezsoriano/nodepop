@@ -39,17 +39,15 @@ app.use(function(err, req, res, next) {
     const typeError = err.details[0].context.label
     const lang = accepts(req).languages()[1]
     const error = messageError (typeError, lang)
-    
-    console.log (error);
+    res.status(500).send(error)
+  } else  {
+    res.locals.message = err.message;
+    res.locals.error = req.app.get('env') === 'development' ? err : {};
+
+    // render the error page
     res.status(err.status || 500);
     res.render('error');
   }
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
-
-  // render the error page
-  res.status(err.status || 500);
-  res.render('error');
 });
 
 module.exports = app;
