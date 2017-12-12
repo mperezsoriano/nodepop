@@ -7,7 +7,11 @@ const express = require('express')
   ,messageError = require('./lib/error-menssages')
   ,accepts = require('accepts');
 
+
 var app = express();
+
+//cargamos el conector a mongoose
+require('./lib/connect-mongoose');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

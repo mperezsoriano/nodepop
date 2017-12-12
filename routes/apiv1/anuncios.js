@@ -6,7 +6,8 @@
 const express = require('express')
   , router = express.Router()
   , joi = require('joi')
-  , composition = require('../../lib/composition-find');
+  , composition = require('../../lib/composition-find')
+  , Anuncio = require('../../models/Anuncio');
 
 const schema = joi.object().keys ({
   tag: joi.any().valid('work', 'lifestyle', 'motor', 'mobile').optional(),
@@ -19,21 +20,26 @@ const schema = joi.object().keys ({
   token: joi.string().token()
 });
 
-/* GET home page. */
 router.get('/', function(req, res, next) {
   const datosQuery = req.query
   joi.validate(datosQuery, schema, (err, value) => {
     if (err) {
       throw(err)
     } else {
-      const parametresFind = composition(value)
+      //const parametresFind = composition(value)
       next();
     }
   })
 });
 
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+router.get('/', async (req, res, next) => {
+  try {
+    console.log (req.query)
+    const row = await Anuncio.find({}).exec()
+    res.json({succes: true, reult: row})
+  } catch (err) {
+    next (err)
+  }
 });
 
 module.exports = router;
