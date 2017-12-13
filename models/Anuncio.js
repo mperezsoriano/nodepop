@@ -28,6 +28,7 @@ const anuncioSchema = mongoose.Schema({
 });
 
 anuncioSchema.statics.list = function(filter) {
+  console.log(filter)
   const query = Anuncio.find({})
   if (filter.tag) { query.where('tags', filter.tag) };
   if (filter.venta) { query.where('venta', filter.venta) };
@@ -36,9 +37,11 @@ anuncioSchema.statics.list = function(filter) {
     query.where('precio').gte(precios[0]);
     query.where('precio').lte(precios[1]);
   }
-  if (filter.organize) { query.sort(filter.organize) }
-  query.skip(1).limit(3)
-
+  if (filter.organize) { query.sort(filter.organize) };
+  if (!filter.start) { filter.start = 0 };
+  if (!filter.limit) { filter.limit = 100 };
+  query.skip((filter.start).toInt)
+  query.limit((filter.limit).toInt)
   return query.exec();
 }
 
