@@ -1,0 +1,44 @@
+[
+    {
+        "nombre": "bicileta",
+        "venta": true,
+        "precio": 230.15,
+        "foto": "fa_00001.png",
+        "tags": ["lifestyle", "motor"]
+    },
+    {
+        "nombre": "iphone 3gs",
+        "venta": false,
+        "precio": 50.00,
+        "foto": "fa_00002.png",
+        "tags": ["lifestyle", "mobile"]
+    },
+    {
+        "nombre": "sofa cama",
+        "venta": true,
+        "precio": 700,
+        "foto": "fa_00003.png",
+        "tags": ["lifestyle"]
+    },
+    {
+        "nombre": "imac 27",
+        "venta": true,
+        "precio": 1120.00,
+        "foto": "fa_00004.png",
+        "tags": ["work", "mobile"]
+    },
+    {
+        "nombre": "lampara",
+        "venta": false,
+        "precio": 30.15,
+        "foto": "fa_00005.png",
+        "tags": ["lifestyle"]
+    },
+    {
+        "nombre": "volante",
+        "venta": true,
+        "precio": 30.00,
+        "foto": "fa_00006.png",
+        "tags": ["motor", "lifestyle"]
+    }
+]
