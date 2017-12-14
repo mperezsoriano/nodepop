@@ -6,8 +6,7 @@ const express = require('express')
   ,bodyParser = require('body-parser')
   ,messageError = require('./lib/error-menssages')
   ,accepts = require('accepts');
-
-
+  
 var app = express();
 
 //cargamos el conector a mongoose
