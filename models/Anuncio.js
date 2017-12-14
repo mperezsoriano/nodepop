@@ -22,7 +22,6 @@ const anuncioSchema = mongoose.Schema({
   precio: {type: Number, min: 0, max: 100000, index: true},
   foto: String,
   tags: {type: [String], index: true}
-
 },{
   collection: 'anuncios'
 });

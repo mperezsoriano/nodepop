@@ -8,13 +8,16 @@ const express = require('express')
   , joi = require('joi')
   , schema = require('../../lib/validate-anuncios')
   , composition = require('../../lib/find-anuncios')
-  , Anuncio = require('../../models/Anuncio');
+  , Anuncio = require('../../models/Anuncio')
+  , jwtAuth = require('../../lib/jwt-Athentification');
 
 /**
  * mildware para la validacion de los datos de entrada de busqueda de los
  * anuncios.
  */
-router.get('/', async function(req, res, next) {
+//router.use(jwtAuth());
+
+router.use('/', jwtAuth(), async function(req, res, next) {
   const datosQuery = req.query
   try{
     const value = await joi.validate(datosQuery, schema);

@@ -14,3 +14,4 @@ password: giulia1234
 
 no subir a produccion la carpeta initdb que es utilizada para iniciar la base de datos para test
 
+El token hay que mandarlo en el resto de las peticiones , en la cabecera o en el body o e el query
