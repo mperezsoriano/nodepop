@@ -9,6 +9,11 @@ var debug = require('debug')('nodepop:server');
 var http = require('http');
 
 /**
+ * Modulo dotenv para utilizar variables de entrorno
+ */
+require('dotenv').config();
+
+/**
  * Get port from environment and store in Express.
  */
 

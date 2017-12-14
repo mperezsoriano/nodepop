@@ -19,7 +19,7 @@ function breakPrice(precio) {
 const anuncioSchema = mongoose.Schema({
   nombre: String,
   venta: {type: Boolean, index: true},
-  precio: {type: Number, min: 0, max: 100000, masindex: true},
+  precio: {type: Number, min: 0, max: 100000, index: true},
   foto: String,
   tags: {type: [String], index: true}
 
@@ -28,7 +28,6 @@ const anuncioSchema = mongoose.Schema({
 });
 
 anuncioSchema.statics.list = function(filter) {
-  console.log(filter)
   const query = Anuncio.find({})
   if (filter.tag) { query.where('tags', filter.tag) };
   if (filter.venta) { query.where('venta', filter.venta) };
@@ -42,6 +41,7 @@ anuncioSchema.statics.list = function(filter) {
   if (!filter.limit) { filter.limit = 100 };
   query.skip((filter.start).toInt)
   query.limit((filter.limit).toInt)
+  //query.select('nombre venta precio foto')
   return query.exec();
 }
 
