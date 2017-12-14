@@ -15,7 +15,7 @@ usuarioSchema.statics.list = function(filter) {
   const sha256 = hash.sha256().update(filter.password).digest('hex');
   const query = Usuario.find({})
     query.where('nombre', filter.nombre);
-    //query.where('clave', sha256);
+    query.where('password', sha256);
   return query.exec();
 }
 

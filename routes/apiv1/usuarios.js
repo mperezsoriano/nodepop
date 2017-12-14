@@ -11,8 +11,6 @@ router.post('/', function(req, res, next) {
   const datosQuery = req.body
   const validation = joi.validate(datosQuery, validateUser);
   if (validation.error) {
-    console.log (validation)
-    console.log (validation.error.message)
     res.json( {result: validation.error.message} )
   } else {
     next()
