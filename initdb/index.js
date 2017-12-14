@@ -7,7 +7,7 @@
  */
 
 const mongoClient = require('mongodb').MongoClient;
-require('dotenv').config()
+require('dotenv').config();
 
 const anuncios = require ('./data/anuncios.json');
 const usuarios = require ('./data/usuarios.json');
@@ -27,22 +27,22 @@ function deleteAndCreateCollection (nameCollection, file, db) {
  */
 
 function resetDB (newNameDB) {
-    const n = (newNameDB == null ? process.env.NAMEDB : newNameDB)
-    let path = process.env.PATHDB + n
+    const n = (newNameDB == null ? process.env.NAMEDB : newNameDB);
+    const path = process.env.PATHDB + n;
 
     mongoClient.connect(path, (err, db) => {
         if (err) {
             console.log ('It is not possible to connect the database');
-            process.exit(1)
+            process.exit(1);
         }
         // reseamos la collecion de usuarios e introducimos los datos de ads.js
-        deleteAndCreateCollection('usuarios', usuarios, db)
+        deleteAndCreateCollection('usuarios', usuarios, db);
         // reseteamos la coleccion de anuncios e introducimos los datos de users.js
-        deleteAndCreateCollection('anuncios', anuncios, db)
+        deleteAndCreateCollection('anuncios', anuncios, db);
         
-        db.close()
+        db.close();
     })
 }
 
 //module.exports.resetDB = resetDB;
-resetDB()
+resetDB();
