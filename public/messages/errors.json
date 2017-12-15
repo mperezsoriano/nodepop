@@ -1,0 +1,12 @@
+{
+  "lang": ["es", "en"],
+  "type": ["Indefined", "mongoose_connections", "no_token", "invalid_token", "type_tags"],
+  "status": [400, 401, 401, 401, 100],
+  "errors": [
+    ["Se ha producido un error indefinido", "Undefined erros"],
+    ["No se pudo conectar a Mongoose", "Not conection to Mongoose"],
+    ["No se ha localizado un token en la peticion", "Token was not located on request"],
+    ["El token enviado es invalido", "Invalid token"],
+    ["Tags no valido", "Invalid tags"]
+  ]
+}

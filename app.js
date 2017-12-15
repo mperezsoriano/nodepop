@@ -4,8 +4,6 @@ const express = require('express')
   ,logger = require('morgan')
   ,cookieParser = require('cookie-parser')
   ,bodyParser = require('body-parser')
-  ,messageError = require('./lib/error-menssages')
-  ,accepts = require('accepts');
   
 var app = express();
 
@@ -39,11 +37,8 @@ app.use(function(req, res, next) {
 // error handler
 app.use(function(err, req, res, next) {
   // set locals, only providing error in development
-  if (err.isJoi) {
-    const typeError = err.details[0].context.label
-    const lang = accepts(req).languages()[1]
-    const error = messageError (typeError, lang)
-    res.status(500).send(error)
+  if (err.isJoi || err.errorLang){
+    res.status(err.statusLang).send({status: 'error', message: err.message})
   } else  {
     res.locals.message = err.message;
     res.locals.error = req.app.get('env') === 'development' ? err : {};

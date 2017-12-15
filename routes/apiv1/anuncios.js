@@ -9,7 +9,7 @@ const express = require('express')
   , schema = require('../../lib/validate-anuncios')
   , composition = require('../../lib/find-anuncios')
   , Anuncio = require('../../models/Anuncio')
-  , jwtAuth = require('../../lib/jwt-Athentification');
+  , jwtAuth = require('../../lib/jwt-authentification');
 
 /**
  * mildware para la validacion de los datos de entrada de busqueda de los
