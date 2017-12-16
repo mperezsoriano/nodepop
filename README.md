@@ -60,3 +60,18 @@ password: manuel1234
 
 usuario: giulia
 password: giulia1234
+
+Routers
+
+
+
+POST http://localhost:3000/apiv1/login/
+
+Valores x-www.form.urlecoded
+email
+password
+
+Nos devuelve un **token** en caso de que el email y el password existan.
+
+
+eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjp7InVzZXJfaWQiOiJcIjVhMzI1YWY3YzFhNDBjMWZkYjk5MjA1M1wiIn0sImlhdCI6MTUxMzQ1MzY0MywiZXhwIjoxNTEzNjI2NDQzfQ.miWt9LEMVgZHlp1j3n4t8_GsQrcmXjlUDc5AH1nvBbI

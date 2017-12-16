@@ -1,39 +1,40 @@
 'use strict'
 
-//expresion regular para el precio /^\d*-?\d*$/i
-//cualquier numero/s opcional, despues un guion opcional y numero/s opcional
-
 const express = require('express')
   , router = express.Router()
   , joi = require('joi')
   , schema = require('../../lib/validate-anuncios')
-  , composition = require('../../lib/find-anuncios')
   , Anuncio = require('../../models/Anuncio')
-  , jwtAuth = require('../../lib/jwt-authentification');
+  , jwtAuth = require('../../lib/jwt-authentification')
+  , errorLang = require('../../lib/language-error');
 
 /**
- * mildware para la validacion de los datos de entrada de busqueda de los
- * anuncios.
+ * GET comprueva que existe un TOKEN valido en en la peticion el mismo puede
+ * estar en el head (x-access-token), en el query (token) o en el body (token)
  */
-//router.use(jwtAuth());
-
 router.use('/', jwtAuth(), async function(req, res, next) {
-  const datosQuery = req.query
   try{
+    const datosQuery = req.query
     const value = await joi.validate(datosQuery, schema);
     next ();
   } catch (err) {
-    next (err);
+    next(errorLang.newError(req, err.message));
   }
 });
 
+/**
+ * GET devuelve los anuncios en un json que se solicitan aplicando los filtros
+ * que nos enviado en la peticion.
+ */
 router.get('/', async (req, res, next) => {
   try {
     const filters = req.query;
+    console.log (filters)
     const row = await Anuncio.list(filters);
+    console.log (filters, row)
     res.json({succes: true, reult: row});
   } catch (err) {
-    next (err);
+    next(errorLang.newError(req, 'not_fount'));
   }
 });
 

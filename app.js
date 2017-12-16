@@ -4,10 +4,14 @@ const express = require('express')
   ,logger = require('morgan')
   ,cookieParser = require('cookie-parser')
   ,bodyParser = require('body-parser')
+  ,errorLang = require('./lib/language-error')
   
 var app = express();
 
-//cargamos el conector a mongoose
+/**
+ * carga de la libreria mongoose para el acceso a la base de 
+ * datos mongodb
+ */
 require('./lib/connect-mongoose');
 
 // view engine setup
@@ -22,30 +26,38 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+/**
+ * Rutas validas 
+ * '/'                      GET No devuelve un html de información
+ * '/apiv1/anuncios/        GET nos devuelve una lista de los anuncios seleccionados
+ * '/apiv1/login/           POST nos devuelve un TOKEN en caso de existeir usuario y contraseña
+ * '/apiv1/authenticacion/  POST crea un usuario si el email no esta ocupado
+ */
 app.use('/', require('./routes/index'));
-app.use('/users', require('./routes/users'));
 app.use('/apiv1/anuncios', require('./routes/apiv1/anuncios'));
-app.use('/apiv1/login', require('./routes/apiv1/usuarios'));
+app.use('/apiv1/usuarios/registration', require('./routes/apiv1/registration'));
+app.use('/apiv1/usuarios/authentication', require('./routes/apiv1/authentication'));
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
-  var err = new Error('Not Found');
-  err.status = 404;
-  next(err);
+  next(errorLang.newError(req, "not_found"));
 });
 
-// error handler
+/**
+ * Verifica si el error probiene del sistema express o es generado por la API
+ * y en este caso determina el lenguaje del sistema y devuelve en error en 
+ * funcion al mismo
+ */
 app.use(function(err, req, res, next) {
-  // set locals, only providing error in development
-  if (err.isJoi || err.errorLang){
+  if (err.errorLang){
     res.status(err.statusLang).send({status: 'error', message: err.message})
   } else  {
-    res.locals.message = err.message;
-    res.locals.error = req.app.get('env') === 'development' ? err : {};
+  res.locals.message = err.message;
+  res.locals.error = req.app.get('env') === 'development' ? err : {};
 
-    // render the error page
-    res.status(err.status || 500);
-    res.render('error');
+  // render the error page
+  res.status(err.status || 500);
+  res.render('error');
   }
 });
 

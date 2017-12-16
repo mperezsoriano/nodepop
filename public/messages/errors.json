@@ -1,12 +1,31 @@
 {
   "lang": ["es", "en"],
-  "type": ["Indefined", "mongoose_connections", "no_token", "invalid_token", "type_tags"],
-  "status": [400, 401, 401, 401, 100],
+  "type": [
+    "not_fount", "internal_error",
+    "autenticacion_fail", "exit_user",
+    "name_error", "email_error", "password_error",
+    "tag_error", "price_error", "start_error", "limit_error", "organize_error", "token_error"
+  ],
+  "status": [
+    404, 500,
+    403, 400,
+    415, 401, 401,
+    415, 415, 415, 415, 415 , 401
+  ],
   "errors": [
+    ["La peticion no encuentra ninguna ruta valida", "Request didn't find any valid path"],
     ["Se ha producido un error indefinido", "Undefined erros"],
-    ["No se pudo conectar a Mongoose", "Not conection to Mongoose"],
+
+
+    
     ["No se ha localizado un token en la peticion", "Token was not located on request"],
     ["El token enviado es invalido", "Invalid token"],
-    ["Tags no valido", "Invalid tags"]
+    ["Tags no valido", "Invalid tags"],
+    ["El nombre introducido no es valido tiene que tener entre 4 y 25 caracteres", "The name you enter is invalid must have between 4 and 25 characters"],
+    ["El email introducido no es valido", "The email entered is invalid"],
+    ["El password introducido no esvalido, tiene que tener entre 5 y 20 caracteres", "The password entered does not esvalido, must be between 5 and 20 characters"],
+    ["Usuario o contraseña incorrectos", "Bad username or password"],
+    ["El email empleado esta en uso", "Employee email in use"],
+    ["El tag no es valido", "Tag is invalid"]
   ]
 }
