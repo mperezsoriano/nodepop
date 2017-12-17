@@ -1,13 +1,13 @@
 'use strict'
 
 var express = require('express')
-  , router = express.Router()
-  , joi = require('joi')
-  , validateUser = require('../../lib/validate-usuarios')
-  , Usuario = require('../../models/Usuario')
-  , jwt = require('jsonwebtoken')
-  , hash = require('hash.js')
-  , errorLang = require('../../lib/language-error');
+  ,router = express.Router()
+  ,joi = require('joi')
+  ,validateUser = require('../../lib/validate-usuarios')
+  ,Usuario = require('../../models/Usuario')
+  ,jwt = require('jsonwebtoken')
+  ,hash = require('hash.js')
+  ,errorLang = require('../../lib/language-error');
 
 /**
  * POST valida que los campos de nombre, email y password introducidos
@@ -45,7 +45,7 @@ router.post('/', async (req, res, next) => {
         next(errorLang.newError(req, 'internal_error'));
         return;
       }
-      res.json({_id: newUser._id, nombre: newUser.nombre, email:newUser.email})
+      res.status(200).json({_id: newUser._id, nombre: newUser.nombre, email:newUser.email})
     })
   } catch (err) {
     if (err.ReferenceError == undefined) next(errorLang.newError(req, 'exit_user'));

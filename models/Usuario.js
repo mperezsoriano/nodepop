@@ -1,7 +1,7 @@
 'use strict'
 
 const mongoose = require('mongoose')
-  , hash = require('hash.js')
+  ,hash = require('hash.js')
 
 /**
  * Esquema de mongoose para el Usuario

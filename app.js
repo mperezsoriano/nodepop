@@ -5,7 +5,7 @@ const express = require('express')
   ,cookieParser = require('cookie-parser')
   ,bodyParser = require('body-parser')
   ,errorLang = require('./lib/language-error')
-  
+
 var app = express();
 
 /**
@@ -28,12 +28,14 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 /**
  * Rutas validas 
- * '/'                      GET No devuelve un html de información
+ * '/'                      GET nos devuelve un html de información
+ * '/tags                   GET nos devuelve los tags validos 
  * '/apiv1/anuncios/        GET nos devuelve una lista de los anuncios seleccionados
  * '/apiv1/login/           POST nos devuelve un TOKEN en caso de existeir usuario y contraseña
  * '/apiv1/authenticacion/  POST crea un usuario si el email no esta ocupado
  */
 app.use('/', require('./routes/index'));
+app.use('/apiv1/tags', require('./routes/apiv1/tags'));
 app.use('/apiv1/anuncios', require('./routes/apiv1/anuncios'));
 app.use('/apiv1/usuarios/registration', require('./routes/apiv1/registration'));
 app.use('/apiv1/usuarios/authentication', require('./routes/apiv1/authentication'));

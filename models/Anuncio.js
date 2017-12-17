@@ -1,7 +1,7 @@
 'use strict'
 
 const mongoose = require('mongoose')
-  , utils = require('../lib/utils')
+  ,utils = require('../lib/utils')
 
 /**
  * Esquema de mongoose para el Anuncio

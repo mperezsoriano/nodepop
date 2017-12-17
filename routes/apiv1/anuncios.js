@@ -1,12 +1,12 @@
 'use strict'
 
 const express = require('express')
-  , router = express.Router()
-  , joi = require('joi')
-  , schema = require('../../lib/validate-anuncios')
-  , Anuncio = require('../../models/Anuncio')
-  , jwtAuth = require('../../lib/jwt-authentification')
-  , errorLang = require('../../lib/language-error');
+  ,router = express.Router()
+  ,joi = require('joi')
+  ,schema = require('../../lib/validate-anuncios')
+  ,Anuncio = require('../../models/Anuncio')
+  ,jwtAuth = require('../../lib/jwt-authentification')
+  ,errorLang = require('../../lib/language-error');
 
 /**
  * GET comprueva que existe un TOKEN valido en en la peticion el mismo puede
@@ -32,7 +32,7 @@ router.get('/', async (req, res, next) => {
     console.log (filters)
     const row = await Anuncio.list(filters);
     console.log (filters, row)
-    res.json({succes: true, reult: row});
+    res.status(200).json({succes: true, reult: row});
   } catch (err) {
     next(errorLang.newError(req, 'not_fount'));
   }
