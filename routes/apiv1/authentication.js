@@ -29,6 +29,7 @@ router.post('/', (req, res, next) => {
  * un error de autentificacion
  */
 router.post('/', async (req, res, next) => {
+  console.log ("Aqui")
   try {
     const filters = req.body;
     const row = await Usuario.list(filters);

@@ -8,8 +8,7 @@ const express = require('express')
  * GET nos devuelve los tags validos para los anuncios
  */
 router.get('/', (req, res, next) => {
-  res.status(200).send({staus: "ok", tags: tags_valid.tags})
-
+  res.status(200).send({staus: "ok", tags: tags_valid.tags});
 })
 
 module.exports = router;

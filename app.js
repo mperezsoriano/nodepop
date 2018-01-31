@@ -7,7 +7,6 @@ const express = require('express')
   ,errorLang = require('./lib/language-error')
 
 var app = express();
-
 /**
  * carga de la libreria mongoose para el acceso a la base de 
  * datos mongodb
