@@ -1,13 +1,15 @@
 # NODEPOP API Server
+Es un servicio basado en NodeJs y MongoDb para la entrega de anuncios bajo demanda de una serie de parámetros introducidos en las peticiones de llamada. Solamente atiende a peticiones de usuarios que se han registrado en el sistema y que posteriormente se han autentificado.
+
 ## Configuración
 
 ### Conexión
 
-Tenemos que tener iniciada la base de datos `MongoDB` para poder realizar la conexión. Las variables de entorno que se encuentran en el fichero `.env` tiene que ser modificadas para dar la ruta correcta.
+Tenemos que tener iniciada la base de datos `MongoDB` para poder realizar la conexión.
+
+Las variables de entorno que se encuentran en el fichero `.env` tiene que ser modificadas para dar la ruta correcta.
 
 ### Producción
-
-> `No` subir a producción la carpeta `initdb` que es utilizada para iniciar la base de datos para test
 
 > Modificar los parámetros necesarios en `.env` para el correcto funcionamiento de la misma
 
@@ -26,22 +28,22 @@ Tenemos que tener iniciada la base de datos `MongoDB` para poder realizar la con
 > - `npm start` : Arranca el servicio de la aplicación
 > - `npm test` : Arranca el reset de la base de datos y la creación de usuarios y clientes para test.
 
-En caso de que queramos tener procesos adinionales a los del master, con un numero de instancias igual al de cores de nuestra maquina, tendremos que poner la variable de `CLUSTER` que se encuentra en `.env` a `true``
+En caso de que queramos tener procesos adinionales a los del master, con un numero de instancias igual al de cores de nuestra maquina, tendremos que poner la variable de `CLUSTER` que se encuentra en `.env` a **true**
 
 ### Peticiones validas
 ```bash
 (GET) http:3000//localhost/
 (GET) http:3000//localhost/apiv1/tags 
 (GET) http:3000//localhost/apiv1/anuncios/?...
-(POST) http:3000//localhost/apiv1/anuncios/registration
-(POST) http:3000//localhost/apiv1/anuncios/autentication
+(POST) http:3000//localhost/apiv1/usuarios/registration
+(POST) http:3000//localhost/apiv1/usuarios/autentication
 ```
 ### Petición de información
 
 ```http
 http://localhost:3000/
 ```
-Nos devuelve infamación del titulo de proyecto y el autor.
+Nos devuelve información del titulo de proyecto y el autor.
 
 ### Petición de tags
 
@@ -119,4 +121,11 @@ Para realizar el test podemos realizar los siguientes pasos.
   password: manuel1234` o `email: giulia@gmail.com, password: giulia1234`
 * nos devolverá un `TOKEN` que copiaremos para realizar la siguiente llamada.
 * Hacemos una llamada GET `http://localhost:3000/apiv1/anuncios/?venta=true` con el TOKEN en el head `x-access-token: (TOKEN que hemos obtenido)`
+
+
+## Test desde servidor AWS.
+
+Direccion IP servidor: http://54.159.104.27 (*muestra pagina www*)
+
+Direccion DNS servidor: http://ec2-54-159-104-27.compute-1.amazonaws.com (*entrada a la aplicación*)
 

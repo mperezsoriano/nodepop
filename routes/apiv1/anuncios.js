@@ -32,7 +32,7 @@ router.get('/', async (req, res, next) => {
     console.log (filters)
     const row = await Anuncio.list(filters);
     console.log (filters, row)
-    res.status(200).json({succes: true, reult: row});
+    res.status(200).json({succes: true, result: row});
   } catch (err) {
     next(errorLang.newError(req, 'not_fount'));
   }
