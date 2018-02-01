@@ -125,7 +125,7 @@ Para realizar el test podemos realizar los siguientes pasos.
 
 ## Test desde servidor AWS.
 
-Direccion IP servidor: http://54.159.104.27 (*muestra pagina www*)
+Direccion IP servidor: http://54.236.235.136 (*muestra pagina www*)
 
-Direccion DNS servidor: http://ec2-54-159-104-27.compute-1.amazonaws.com (*entrada a la aplicación*)
+Direccion DNS servidor: http://ec2-54-236-235-136.compute-1.amazonaws.com (*entrada a la aplicación*)
 
